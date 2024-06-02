@@ -1,51 +1,108 @@
 ---
-interface Props {
-	title: string;
+import siteConfig from "../types/site";
+import { SEO } from "astro-seo";
+import { ViewTransitions } from "astro:transitions";
+import { Head } from "astro-capo";
+
+export interface Props {
+  title?: string | undefined;
+  description?: string | undefined;
+  openGraphImage?:
+    | { src: string; alt: string; width?: number; height?: number }
+    | undefined;
+  color?: string;
 }
 
-const { title } = Astro.props;
+const { title, description, openGraphImage } = Astro.props;
+
+const { pathname } = Astro.url;
+
+const {
+  name: siteName,
+  description: siteDescription,
+  url: siteUrl,
+} = siteConfig;
+
+const canonical = `${siteUrl}${pathname}`;
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="cs">
+  <Head>
+    <SEO
+      charset="UTF-8"
+      title={title!}
+      titleTemplate={`${siteName} - %s`}
+      description={description ?? siteDescription}
+      canonical={canonical}
+      openGraph={{
+        basic: {
+          title: siteName,
+          type: "website",
+          url: canonical,
+          image: openGraphImage?.src ?? "/BartyspaceScreen.png",
+        },
+        optional: {
+          description: description ?? siteDescription,
+          siteName: siteName,
+        },
+        image: {
+          alt: openGraphImage?.alt ?? siteName,
+          width: openGraphImage?.width ?? 1200,
+          height: openGraphImage?.height ?? 630,
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: siteName,
+        description: description ?? siteDescription,
+        site: "https://twitter.com/yoBartys",
+        image: "/android-chrome-512x512.png",
+      }}
+      extend={{
+        link: [
+          { rel: "sitemap", href: "/sitemap-index.xml" },
+          {
+            rel: "apple-touch-icon",
+            sizes: "180x180",
+            href: "/apple-touch-icon.png",
+          },
+          {
+            rel: "icon",
+            type: "image/png",
+            sizes: "32x32",
+            href: "/favicon-32x32.png",
+          },
+          {
+            rel: "icon",
+            type: "image/png",
+            sizes: "16x16",
+            href: "/favicon-16x16.png",
+          },
+          { rel: "manifest", href: "/site.webmanifest" },
+          { rel: "mask-icon", href: "/safari-pinned-tab.svg" },
+          { rel: "stylesheet", href: "/styles/global.css" },
+        ],
+        meta: [
+          { name: "viewport", content: "width=device-width" },
+          { name: "robots", content: "index" },
+          { name: "generator", content: Astro.generator },
+          { name: "msapplication-TileColor", content: "#da532c" },
+          { name: "theme-color", content: "ffffff" },
+        ],
+      }}
+    />
+    <ViewTransitions />
+    <script is:inline type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Bartyspace Labs",
+        "url": "https://bartyspacelabs.netlify.app/"
+      }
+    </script>
+  </Head>
+  <body>
+    <slot />
+  </body>
 </html>
-<style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-		background-size: 224px;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-</style>
