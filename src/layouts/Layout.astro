@@ -3,6 +3,9 @@ import siteConfig from "../types/site";
 import { SEO } from "astro-seo";
 import { ViewTransitions } from "astro:transitions";
 import { Head } from "astro-capo";
+import Analytics from "../components/Analytics";
+import SpeedInsights from "@vercel/speed-insights/astro";
+
 export interface Props {
   title?: string | undefined;
   description?: string | undefined;
@@ -96,12 +99,14 @@ const canonical = `${siteUrl}${pathname}`;
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Bartyspace Labs",
-        "url": "https://bartyspacelabs.netlify.app/"
+        "name": "HC Draci",
+        "url": "https://hc-draci.vercel.app/"
       }
     </script>
   </Head>
   <body>
     <slot />
+    <SpeedInsights />
+    <Analytics />
   </body>
 </html>
