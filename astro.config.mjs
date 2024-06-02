@@ -9,5 +9,11 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   site: "https://hc-draci.vercel.app",
-  integrations: [tailwind(), playformCompress(), sitemap(), robotsTxt(), react()]
+  integrations: [
+    tailwind(),
+    playformCompress(),
+    sitemap(),
+    robotsTxt(),
+    react(),
+  ],
 });

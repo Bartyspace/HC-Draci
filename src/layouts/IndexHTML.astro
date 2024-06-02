@@ -83,7 +83,6 @@ const canonical = `${siteUrl}${pathname}`;
           },
           { rel: "manifest", href: "/site.webmanifest" },
           { rel: "mask-icon", href: "/safari-pinned-tab.svg" },
-          { rel: "stylesheet", href: "/styles/global.css" },
         ],
         meta: [
           { name: "viewport", content: "width=device-width" },
@@ -107,6 +106,6 @@ const canonical = `${siteUrl}${pathname}`;
   <body>
     <slot />
     <SpeedInsights />
-    <Analytics />
+    <Analytics client:visible />
   </body>
 </html>
