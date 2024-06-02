@@ -1,14 +1,14 @@
 const siteConfig = {
-  name: 'Bartyspace Labs',
-  slogan: 'Spojuji technologii s kreativitou',
+  name: "HC Draci",
+  slogan: "Hokejový klub Staré Křečany",
   description:
-    'Vítejte v Bartyspace Labs, vašem digitálním portálu pro špičkový vývoj a design webových stránek v Astro. Navštivte moji stránku a přesvědčte se!',
-  email: 'bartys2000@gmail.com',
-  url: 'https://bartyspacelabs.tech',
+    "HC Draci - Staré Křečany jsou hokejový klub založený v roce 1990. Hrajeme opravdový hokej a pravidelně pořádáme víkendové turnaje na stadiónu v Rumburku. Přijďte se k nám podívat na bruslení a podpořit nás!",
+  email: "",
+  url: "https://hc-draci.verlcel.app",
   links: {
-    sourcecode: 'https://github.com/Bartyspace/bartyspaceweb',
-    github: 'https://https://github.com/Bartyspace'
-  }
+    sourcecode: "https://github.com/Bartyspace/HC-Draci",
+    github: "https://https://github.com/Bartyspace",
+  },
 } as const;
 
 export default siteConfig;

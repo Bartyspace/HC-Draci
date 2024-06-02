@@ -3,14 +3,9 @@ import tailwind from "@astrojs/tailwind";
 import playformCompress from "@playform/compress";
 import sitemap from "@astrojs/sitemap";
 import robotsTxt from "astro-robots-txt";
-import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://hc-draci.vercel.app",
   integrations: [tailwind(), playformCompress(), sitemap(), robotsTxt()],
-  output: "server",
-  adapter: vercel({
-    webAnalytics: { enabled: true },
-  }),
 });
